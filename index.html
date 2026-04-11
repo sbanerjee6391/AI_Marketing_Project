@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Experience premium Indonesian dining at Nusantara Flame and Senja Rasa. Order now via WhatsApp." />
+  <title>Nusantara Dining | Premium Indonesian Restaurants</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0d0c;
+      --surface: #171311;
+      --surface-alt: #221c18;
+      --text: #f6f1ea;
+      --muted: #c2b5a7;
+      --accent: #d4a15f;
+      --accent-deep: #b9843d;
+      --shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
+      --radius: 18px;
+      --container: min(1120px, 92vw);
+      --header-h: 76px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top, #201813 0%, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: var(--container);
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 86px 0;
+      scroll-margin-top: calc(var(--header-h) + 20px);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 40px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: var(--header-h);
+      backdrop-filter: blur(14px);
+      background: rgba(15, 13, 12, 0.86);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .nav-wrap {
+      width: var(--container);
+      margin: 0 auto;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      list-style: none;
+      color: #e6dbcf;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .phone-link {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 161, 95, 0.45);
+      background: rgba(212, 161, 95, 0.1);
+      color: #f9e4c8;
+      font-weight: 600;
+      transition: 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .phone-link:hover {
+      background: rgba(212, 161, 95, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .menu-toggle span,
+    .menu-toggle::before,
+    .menu-toggle::after {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 2px;
+      margin: 5px auto;
+      background: #fff;
+      transition: 0.3s ease;
+    }
+
+    .menu-toggle[aria-expanded='true']::before {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded='true'] span {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded='true']::after {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .hero {
+      padding-top: 50px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .hero-card {
+      min-height: 430px;
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.75));
+      z-index: -1;
+    }
+
+    .hero-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      transition: transform 0.6s ease;
+    }
+
+    .hero-card:hover img {
+      transform: scale(1.07);
+    }
+
+    .hero-content {
+      padding: 32px;
+      max-width: 34ch;
+    }
+
+    .hero-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f6d8a8;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 2.3vw, 2.5rem);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .hero-text {
+      color: #e9dfd4;
+      margin-bottom: 24px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, var(--accent), var(--accent-deep));
+      color: #1a120a;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 18px rgba(212, 161, 95, 0.34);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 22px rgba(212, 161, 95, 0.45);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .about-card {
+      background: linear-gradient(160deg, var(--surface), var(--surface-alt));
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-card h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 12px;
+      font-size: 1.5rem;
+    }
+
+    .about-card p {
+      color: var(--muted);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .menu-item {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      min-height: 220px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .menu-item img {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .menu-item::after {
+      content: attr(data-name);
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 12px 14px;
+      font-weight: 600;
+      font-size: 0.94rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
+      opacity: 0.96;
+    }
+
+    .menu-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .contact-panel {
+      background: linear-gradient(170deg, #1e1814, #14110e);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      padding: clamp(24px, 4vw, 42px);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+      color: #e2d7cb;
+    }
+
+    .contact-list span {
+      color: #f2c995;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    .contact-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .floating-wa {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 999;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: none;
+      display: grid;
+      place-items: center;
+      background: #25d366;
+      color: white;
+      box-shadow: 0 12px 20px rgba(37, 211, 102, 0.35);
+      transition: transform 0.2s ease;
+    }
+
+    .floating-wa:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px 0 36px;
+      color: #b7a998;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      :root {
+        --header-h: 68px;
+      }
+
+      .menu-toggle {
+        display: inline-block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: var(--header-h);
+        right: 4vw;
+        left: 4vw;
+        background: rgba(20, 17, 14, 0.98);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        flex-direction: column;
+        gap: 18px;
+        padding: 18px;
+        transform: scale(0.97);
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.25s ease;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+      }
+
+      .phone-link {
+        display: none;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: 360px;
+      }
+
+      .hero-content {
+        padding: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" aria-label="Main Header">
+    <div class="nav-wrap">
+      <a class="brand" href="#home" aria-label="Nusantara Dining Home">Nusantara Dining</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-controls="navMenu" aria-expanded="false">
+        <span></span>
+      </button>
+      <ul class="nav-links" id="navMenu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a class="phone-link" href="tel:+6281234567890" aria-label="Call +62 812 3456 7890">+62 812 3456 7890</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <article class="hero-card" aria-label="Nusantara Flame Banner">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=70" alt="Elegant restaurant interior with warm lights" loading="lazy" />
+          <div class="hero-content">
+            <p class="hero-kicker">Restaurant One</p>
+            <h1 class="hero-title">Nusantara Flame</h1>
+            <p class="hero-text">Authentic Indonesian grill with contemporary plating and unforgettable evening ambience.</p>
+            <a class="btn-primary" href="https://wa.me/6281234567890?text=Hello%20I%20want%20to%20order" target="_blank" rel="noopener">Order on WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="hero-card" aria-label="Senja Rasa Banner">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1400&q=70" alt="Premium dining table setup with dishes" loading="lazy" />
+          <div class="hero-content">
+            <p class="hero-kicker">Restaurant Two</p>
+            <h2 class="hero-title">Senja Rasa</h2>
+            <p class="hero-text">A refined culinary space serving heritage recipes reimagined for modern city dining.</p>
+            <a class="btn-primary" href="https://wa.me/6281234567890?text=Hello%20I%20want%20to%20order" target="_blank" rel="noopener">Order on WhatsApp</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">Two Destinations, One Culinary Standard</h2>
+        <p class="section-sub">Discover two signature restaurant concepts crafted for memorable dining moments, from intimate dinners to family gatherings.</p>
+        <div class="about-grid">
+          <article class="about-card">
+            <h3>Nusantara Flame</h3>
+            <p>Nusantara Flame specializes in charcoal-fired Indonesian favorites, pairing rich spices with premium ingredients. Ideal for guests who love smoky aromas, bold flavor layers, and vibrant open-kitchen energy.</p>
+          </article>
+          <article class="about-card">
+            <h3>Senja Rasa</h3>
+            <p>Senja Rasa offers a calmer, elegant setting with artisanal dishes inspired by regional classics. Every plate is prepared with meticulous detail, making it perfect for date nights and business dining.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="container">
+        <h2 class="section-title">Signature Menu Highlights</h2>
+        <p class="section-sub">A visual preview of our most-loved creations, from traditional comfort dishes to chef-crafted specialties.</p>
+        <div class="menu-grid">
+          <figure class="menu-item" data-name="Sate Maranggi">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=70" alt="Sate maranggi skewers with grilled glaze" loading="lazy" />
+          </figure>
+          <figure class="menu-item" data-name="Nasi Goreng Premium">
+            <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1000&q=70" alt="Premium nasi goreng with toppings" loading="lazy" />
+          </figure>
+          <figure class="menu-item" data-name="Seafood Sambal Matah">
+            <img src="https://images.unsplash.com/photo-1617196035154-1e8f8d3f589e?auto=format&fit=crop&w=1000&q=70" alt="Seafood dish with sambal matah" loading="lazy" />
+          </figure>
+          <figure class="menu-item" data-name="Rendang Wagyu">
+            <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1000&q=70" alt="Rendang wagyu served in a dark plate" loading="lazy" />
+          </figure>
+          <figure class="menu-item" data-name="Ayam Bakar Madu">
+            <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=1000&q=70" alt="Honey grilled chicken Indonesian style" loading="lazy" />
+          </figure>
+          <figure class="menu-item" data-name="Es Cendol Signature">
+            <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=1000&q=70" alt="Cold Indonesian dessert beverage" loading="lazy" />
+          </figure>
+          <figure class="menu-item" data-name="Soto Betawi">
+            <img src="https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=1000&q=70" alt="Soto betawi in a bowl" loading="lazy" />
+          </figure>
+          <figure class="menu-item" data-name="Pisang Caramel">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1000&q=70" alt="Dessert with caramelized banana plating" loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-panel">
+          <div>
+            <h2 class="section-title">Reserve, Order, or Ask Us Anything</h2>
+            <p class="section-sub">Fast response via WhatsApp for table reservations, takeaway, and delivery inquiries.</p>
+            <ul class="contact-list">
+              <li><span>Phone:</span><a href="tel:+6281234567890">+62 812 3456 7890</a></li>
+              <li><span>Address 1:</span>Jl. Sudirman No. 88, Jakarta, Indonesia</li>
+              <li><span>Address 2:</span>Jl. Diponegoro No. 27, Bandung, Indonesia</li>
+              <li><span>Hours:</span>Everyday, 10:00 - 22:00 WIB</li>
+            </ul>
+          </div>
+          <div class="contact-cta">
+            <a class="btn-primary" href="https://wa.me/6281234567890?text=Hello%20I%20want%20to%20order" target="_blank" rel="noopener">Order on WhatsApp</a>
+            <a class="phone-link" href="tel:+6281234567890">Call Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="floating-wa" href="https://wa.me/6281234567890?text=Hello%20I%20want%20to%20order" target="_blank" rel="noopener" aria-label="Open WhatsApp chat">
+    <svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 2.667A13.316 13.316 0 0 0 4.47 22.94L2.667 29.333l6.56-1.72A13.333 13.333 0 1 0 16 2.667Zm0 24a10.58 10.58 0 0 1-5.386-1.467l-.386-.226-3.893 1.013 1.04-3.787-.253-.4A10.647 10.647 0 1 1 16 26.667Zm5.853-7.987c-.32-.16-1.893-.933-2.186-1.04-.293-.106-.507-.16-.72.16-.213.32-.826 1.04-1.013 1.253-.186.213-.373.24-.693.08-.32-.16-1.346-.493-2.56-1.573-.946-.84-1.586-1.88-1.773-2.2-.186-.32-.02-.493.14-.653.146-.145.32-.373.48-.56.16-.186.213-.32.32-.533.106-.213.053-.4-.027-.56-.08-.16-.72-1.733-.986-2.373-.26-.626-.526-.54-.72-.546l-.613-.01c-.213 0-.56.08-.853.4-.293.32-1.12 1.093-1.12 2.666s1.146 3.093 1.306 3.306c.16.213 2.253 3.44 5.453 4.826.76.328 1.353.523 1.813.67.76.24 1.453.206 2 .125.61-.09 1.893-.773 2.16-1.52.266-.746.266-1.386.186-1.52-.08-.133-.293-.213-.613-.373Z" fill="currentColor"/>
+    </svg>
+  </a>
+
+  <footer>
+    <div class="container">
+      <p>Nusantara Flame &amp; Senja Rasa &mdash; Premium Indonesian Dining.</p>
+      <p>&copy; 2026 Nusantara Dining. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const navLinks = navMenu.querySelectorAll('a');
+
+    menuToggle.addEventListener('click', () => {
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+      navMenu.classList.toggle('open');
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const clickedInsideMenu = navMenu.contains(event.target);
+      const clickedToggle = menuToggle.contains(event.target);
+      if (!clickedInsideMenu && !clickedToggle && navMenu.classList.contains('open')) {
+        navMenu.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
+</body>
+</html>

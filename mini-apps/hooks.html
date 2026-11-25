@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hook Generator</title><link rel="stylesheet" href="style.css"></head><body><main>
+<a class="back" href="index.html">← All apps</a>
+<h1>⚡ Hook Generator</h1><p class="sub">Your first line decides everything.</p>
+<div class="card">
+<label>Your topic</label><input id="topic" placeholder="Instagram growth">
+<label>Who is it for?</label><input id="who" placeholder="small business owners">
+<button id="go">Give me hooks</button>
+</div>
+<div class="card" id="box" hidden><ul class="list" id="list"></ul></div></main>
+<script>
+const T=[
+ "Most {who} get {t} wrong. Here's the fix.",
+ "I wish someone told me this about {t} sooner.",
+ "Stop doing this if you care about {t}.",
+ "{t} in 60 seconds. Save this.",
+ "The 3-step {t} plan every one of the {who} needs.",
+ "Nobody talks about this {t} secret.",
+ "If I had to learn {t} again from zero, I'd do this.",
+ "{who}: this one {t} mistake is costing you money.",
+ "I tested {t} for 30 days. Here's what happened.",
+ "Unpopular opinion: {t} is easier than you think.",
+ "Read this before you spend a single rupee on {t}.",
+ "The simple {t} trick that changed everything for me."
+];
+const $=id=>document.getElementById(id);
+$('go').onclick=()=>{
+  const t=$('topic').value.trim()||'marketing',w=$('who').value.trim()||'creators';
+  const picks=[...T].sort(()=>Math.random()-.5).slice(0,10);
+  $('list').innerHTML='';
+  picks.forEach(p=>{const s=p.replaceAll('{t}',t).replaceAll('{who}',w);const li=document.createElement('li');
+    li.textContent=s.charAt(0).toUpperCase()+s.slice(1);li.title='Click to copy';li.style.cursor='pointer';
+    li.onclick=()=>{navigator.clipboard.writeText(li.textContent);li.style.color='var(--accent)'};$('list').append(li)});
+  $('box').hidden=false;
+};
+</script></body></html>

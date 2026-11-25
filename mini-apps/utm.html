@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UTM Link Builder</title><link rel="stylesheet" href="style.css"></head><body><main>
+<a class="back" href="index.html">← All apps</a>
+<h1>🔗 UTM Link Builder</h1><p class="sub">Know which post brought the sale.</p>
+<div class="card">
+<label>Website link</label><input id="url" placeholder="https://yoursite.com/offer">
+<label>Source (where)</label><input id="src" placeholder="instagram">
+<label>Medium (how)</label><input id="med" placeholder="social">
+<label>Campaign (why)</label><input id="camp" placeholder="diwali_sale">
+<button id="go">Build my link</button>
+<div class="out" id="out"></div>
+<button id="copy" hidden>Copy link</button>
+</div></main>
+<script>
+const $=id=>document.getElementById(id);
+const clean=s=>s.trim().toLowerCase().replace(/\s+/g,'_');
+$('go').onclick=()=>{
+  let u;try{u=new URL($('url').value.trim())}catch{ $('out').textContent='Please add a full link, like https://yoursite.com';$('copy').hidden=true;return}
+  [['utm_source','src'],['utm_medium','med'],['utm_campaign','camp']].forEach(([k,id])=>{const v=clean($(id).value);if(v)u.searchParams.set(k,v)});
+  $('out').textContent=u.toString();$('copy').hidden=false;
+};
+$('copy').onclick=()=>{navigator.clipboard.writeText($('out').textContent);$('copy').textContent='Copied ✓';setTimeout(()=>$('copy').textContent='Copy link',1500)};
+</script></body></html>

@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Caption Counter</title><link rel="stylesheet" href="style.css"></head><body><main>
+<a class="back" href="index.html">← All apps</a>
+<h1>✍️ Caption Counter</h1><p class="sub">Write once. See where it fits.</p>
+<div class="card"><label>Your caption</label><textarea id="t" placeholder="Start typing..."></textarea>
+<p class="sub" id="meta" style="margin:8px 0 0"></p></div>
+<div class="card" id="rows"></div></main>
+<script>
+const limits={'X (Twitter)':280,'Threads':500,'Instagram':2200,'LinkedIn':3000,'TikTok':4000,'YouTube title':100};
+const t=document.getElementById('t');
+function draw(){
+  const n=[...t.value].length,w=t.value.trim()?t.value.trim().split(/\s+/).length:0;
+  document.getElementById('meta').textContent=`${n} characters · ${w} words`;
+  document.getElementById('rows').innerHTML=Object.entries(limits).map(([p,l])=>{
+    const left=l-n;return `<div class="row"><span>${p}</span><span class="${left>=0?'ok':'bad'}">${left>=0?left+' left':Math.abs(left)+' too long'}</span></div>`}).join('');
+}
+t.oninput=draw;draw();
+</script></body></html>
